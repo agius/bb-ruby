@@ -131,6 +131,10 @@ class TestBBRuby < Test::Unit::TestCase
     assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img]http://zoople/hochzeit.png[/img]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img=http://zoople/hochzeit.png]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit.png[/img]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png?q=123" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit.png?q=123[/img]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit" style="width: 95px; height: 96px;" />', '[img size=95x96]http://zoople/hochzeit[/img]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit.png?q=123" alt="" />', '[img]http://zoople/hochzeit.png?q=123[/img]'.bbcode_to_html
+    assert_equal '<img src="http://zoople/hochzeit" alt="" />', '[img]http://zoople/hochzeit[/img]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" alt="" />', '[img:7a9ca2c5c3]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size=95x96]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
     assert_equal '<img src="http://zoople/hochzeit.png" style="width: 95px; height: 96px;" />', '[img:7a9ca2c5c3 size="95x96"]http://zoople/hochzeit.png[/img:7a9ca2c5c3]'.bbcode_to_html
@@ -146,6 +150,7 @@ class TestBBRuby < Test::Unit::TestCase
 
   def test_vimeo
     assert_equal '<object type="application/x-shockwave-flash" width="500" height="350" data="http://www.vimeo.com/moogaloop.swf?clip_id=3485239"><param name="quality" value="best" /><param name="allowfullscreen" value="true" /><param name="scale" value="showAll" /><param name="movie" value="http://www.vimeo.com/moogaloop.swf?clip_id=3485239" /></object>', '[vimeo]http://www.vimeo.com/3485239[/vimeo]'.bbcode_to_html
+    assert_equal '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/E4Fbk52Mk1w"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/E4Fbk52Mk1w" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>', '[youtube]https://youtu.be/E4Fbk52Mk1w[/youtube]'.bbcode_to_html
   end
 
   def test_google_video
@@ -204,7 +209,7 @@ class TestBBRuby < Test::Unit::TestCase
   end
 
   def test_self_tag_list
-    assert_equal 32, BBRuby.tag_list.size
+    assert_equal 34, BBRuby.tag_list.size
   end
 
   def test_redefinition_of_tag_html

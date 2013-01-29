@@ -159,14 +159,14 @@ module BBRuby
       '[img size=96x96]http://www.google.com/intl/en_ALL/images/logo.gif[/img]',
       :image],
     'Image (Alternative)' => [
-      /\[img=([^\[\]].*?)\.(#{@@imageformats})\]/im,
-      '<img src="\1.\2" alt="" />',
+      /\[img=([^\[\]].*?)\]/im,
+      '<img src="\1" alt="" />',
       'Display an image (alternative format)',
       '[img=http://myimage.com/logo.gif]',
       :image],
     'Image' => [
-      /\[img(:.+)?\]([^\[\]].*?)\.(#{@@imageformats})\[\/img\1?\]/im,
-      '<img src="\2.\3" alt="" />',
+      /\[img(:.+)?\]([^\[\]].*?)\[\/img\1?\]/im,
+      '<img src="\2" alt="" />',
       'Display an image',
       'Check out this crazy cat: [img]http://catsweekly.com/crazycat.jpg[/img]',
       :image],
@@ -183,6 +183,12 @@ module BBRuby
       '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\2"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\2" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
       'Display a video from YouTube.com (alternative format)',
       '[youtube]http://youtube.com/watch/v/E4Fbk52Mk1w[/youtube]',
+      :video],
+    'YouTube (moar)' => [
+       /\[youtube\](?:https??:\/\/)?(?:www\.)?youtu(?:\.be\/|be\.com\/watch\?v=)([A-Z0-9\-_]+)(?:&(.*?))?\[\/youtube\]/im,
+      '<object width="320" height="265"><param name="movie" value="http://www.youtube.com/v/\1"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/\1" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="320" height="265"></embed></object>',
+      'Display a video from YouTube.com (moar formats)',
+      '[youtube]http://youtu.be/gYGioWinQQE[/youtube]',
       :video],
     'Vimeo' => [
       /\[vimeo\](.*?)\/(\d+)\[\/vimeo\]/im,
